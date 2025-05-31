@@ -1,25 +1,23 @@
-default_stages: [ commit, push ]
+default_stages: [ commit ]
 fail_fast: true
+
+default_language_version:
+  python: python3.12
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.10
+    rev: v0.11.12
     hooks:
       - id: ruff
         name: Ruff (fix)
         args: [ --fix, --verbose ]
-        stages: [ commit ]
         types: [ python ]
-        language_version: python3.12
-        additional_dependencies: [ ruff==0.11.10 ]
 
   - repo: https://github.com/psf/black
     rev: 25.1.0
     hooks:
       - id: black
         name: Black (formatting)
-        language_version: python3.12
-        stages: [ commit ]
         types: [ python ]
         args: [ --safe, --quiet ]
 
@@ -27,10 +25,10 @@ repos:
     hooks:
       - id: mypy
         name: Mypy (type checking)
-        entry: poetry run mypy --install-types --non-interactive --strict src/ tests/
+        entry: poetry run mypy
+        args: [--install-types, --non-interactive, --strict]
         language: system
-        pass_filenames: false
-        stages: [ push ]
+        types: [ python ]
         always_run: true
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -38,9 +36,9 @@ repos:
     hooks:
       - id: check-added-large-files
         args: [ --maxkb=500 ]
+        stages: [ commit, push ]
       - id: check-ast
       - id: check-yaml
+      - id: check-toml
       - id: end-of-file-fixer
       - id: trailing-whitespace
-        stages: [ commit ]
-
