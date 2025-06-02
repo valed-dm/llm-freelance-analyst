@@ -145,6 +145,10 @@ NLP = (Natural Language Processing )
 
 Эта задача представляется не такой простой, как кажется на первый взгляд.
 Если заняться ей с нуля, то очевидно выйдем за рамки тестового задания, в ом числе и по срокам.
+Тем не менее в проекте применен декоратор для оценки затрачиваемого времени на запросы, переводы итп.
+Большинство запросов выполняются за время 0.5–5 секунд.
+
+
 Коротко о сценариях:
 
 Evaluating the efficiency and accuracy of your hybrid NLP and data analysis system requires a multi-faceted approach, looking at both the NLP components and the final analytical output. Here's a breakdown of how you can do it:
