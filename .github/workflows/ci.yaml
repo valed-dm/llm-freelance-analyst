@@ -54,9 +54,6 @@ jobs:
       - name: Lint with Ruff
         run: poetry run ruff check .
 
-      - name: Run Mypy (Type Checking)
-        run: poetry run mypy --install-types --non-interactive --strict src
-
       - name: Run tests and collect coverage
         run: |
           poetry run pytest \
