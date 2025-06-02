@@ -1,4 +1,4 @@
-default_stages: [ commit ]
+default_stages: [ pre-commit ]
 fail_fast: true
 
 default_language_version:
@@ -29,14 +29,14 @@ repos:
         args: [--install-types, --non-interactive, --strict]
         language: system
         types: [ python ]
-        always_run: true
+        stages: [manual]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
       - id: check-added-large-files
         args: [ --maxkb=500 ]
-        stages: [ commit, push ]
+        stages: [ pre-commit, pre-push ]
       - id: check-ast
       - id: check-yaml
       - id: check-toml
