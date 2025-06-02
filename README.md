@@ -99,3 +99,16 @@ python -m src.main # For interactive mode
     *   Interactive session for sequential queries.
     *   Single-query execution via command-line arguments.
     *   A test mode to run a predefined suite of queries for validation.
+
+
+[<img src="docs/images/img_01.png" width="1200"/>]()
+
+[<img src="docs/images/img_02.png" width="1200"/>]()
+
+[<img src="docs/images/img_03.png" width="1200"/>]()
+
+[<img src="docs/images/img_04.png" width="600"/>]()
+
+[<img src="docs/images/img_05.png" width="600"/>]()
+
+[<img src="docs/images/img_06.png" width="600"/>]()
