@@ -101,6 +101,19 @@ python -m src.main # For interactive mode
     *   A test mode to run a predefined suite of queries for validation.
 
 
+## Краткая характеристика примененного решения:
+
+Для выполнения задачи выбран стандартный подход: LLM (Large Language Model (artificial intelligence))
+для распознания общего уровня и смысла запроса, перевода с одного языка на другой, и последующий парсинг
+строк для точного получения необходимых параметров. Такой сценарий называют "Гибридная система распознавания языка"
+("HYBRID NLU SYSTEM").
+
+Перевод запроса с русского на английский язык применен, потому что доля английского языка при обучении
+модели преобладает, соответственно точность распознавания/релевантности ответов в этом случае выше.
+
+NLU = (Natural Language Understanding),
+NLP = (Natural Language Processing )
+
 [<img src="docs/images/img_01.png" width="1200"/>]()
 
 [<img src="docs/images/img_02.png" width="1200"/>]()
