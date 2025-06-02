@@ -107,7 +107,7 @@ python -m src.main # For interactive mode
 
 [<img src="docs/images/img_03.png" width="1200"/>]()
 
-[<img src="docs/images/img_04.png" width="600"/>]()
+[<img src="docs/images/img_04.png" width="1200"/>]()
 
 [<img src="docs/images/img_05.png" width="600"/>]()
 
