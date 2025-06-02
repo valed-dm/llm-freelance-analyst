@@ -8,6 +8,8 @@
 [transformers-link]: https://huggingface.co/docs/transformers/index
 [pytorch-badge]: https://img.shields.io/badge/PyTorch-2.2.2%2B-blue
 [pytorch-link]: https://pytorch.org/
+[ruff-badge]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+[ruff-link]: https://github.com/astral-sh/ruff
 [license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
 [license-link]: https://opensource.org/licenses/MIT
 
@@ -15,6 +17,7 @@
 [![Pandas][pandas-badge]][pandas-link]
 [![Transformers][transformers-badge]][transformers-link]
 [![PyTorch][pytorch-badge]][pytorch-link]
+[![Ruff][ruff-badge]][ruff-link]
 [![License: MIT][license-badge]][license-link]
 
 A command-line interface (CLI) tool for analyzing freelancer earnings data using natural language queries.
@@ -26,7 +29,7 @@ dataset (CSV) via Pandas, ensuring both flexibility in input and accuracy in res
 exposing the dataset to the LLMs.
 
 
-Run from Project Root: You should run this cli.py using the module execution flag from your project's root directory (EORA):
+Run from Project Root: You should run this main.py using the module execution flag from your project's root directory (EORA):
 ```
 python -m src.main --test
 python -m src.main "your query here" --lang en
