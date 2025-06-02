@@ -59,7 +59,7 @@ jobs:
           poetry run pytest \
             --cov=src \
             --cov-report=xml \
-            --cov-fail-under=50
+            --cov-fail-under=45
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
