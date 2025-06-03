@@ -19,8 +19,20 @@ configure_logging()
 logger = logging.getLogger(__name__)
 
 
-def run_interactive_mode(orchestrator: FreelancerQueryOrchestrator):
-    """Runs the CLI in interactive mode."""
+def run_interactive_mode(orchestrator: FreelancerQueryOrchestrator) -> None:
+    """Run the CLI in interactive mode, processing user queries until exit.
+
+    Provides a conversational interface where users can input natural language queries
+    about freelancer analytics. The mode supports English and Russian inputs.
+
+    Args:
+        orchestrator: An initialized query processor that handles the business logic
+            for parsing and executing user queries. Must implement `process_query()`.
+
+    Raises:
+        KeyboardInterrupt: Handled gracefully to exit the loop (user presses Ctrl+C)
+        Exception: All other exceptions are caught and logged before continuing
+    """
     logger.info("Freelancer Analytics CLI (type 'exit' or 'quit' to quit)\n")
     logger.info("You can ask questions in English or Russian.")
     while True:
@@ -45,7 +57,7 @@ def run_interactive_mode(orchestrator: FreelancerQueryOrchestrator):
             )
 
 
-def run_test_queries(orchestrator: FreelancerQueryOrchestrator):
+def run_test_queries(orchestrator: FreelancerQueryOrchestrator) -> None:
     """Runs a predefined set of test queries."""
     logger.info("Starting test queries...")
 
@@ -57,26 +69,37 @@ def run_test_queries(orchestrator: FreelancerQueryOrchestrator):
     logger.info("Test queries finished.")
 
 
-def main():
-    """Main function to set up components and handle CLI arguments."""
+def main() -> int:
+    """Entry point for the Freelancer Analytics CLI application.
+
+    Initializes all components, processes, command line arguments, and routes execution
+    to either interactive mode, single query processing, or test mode.
+
+    Returns:
+        int: Process exit code (0 for success, 1 for error)
+
+    Raises:
+        FileNotFoundError: If the specified data file doesn't exist,
+        RuntimeError: For critical failures during component initialization
+    """
     logger.info("Application starting...")
 
     parser = argparse.ArgumentParser(
-        description="Freelancer Analytics - Analyze freelancer earnings data"
-        " using LLMs and Pandas."
+        description="Freelancer Analytics - Analyze freelancer earnings data "
+        "using LLMs and Pandas."
     )
     parser.add_argument(
         "query",
         nargs="?",
-        help="Natural language query to analyze."
-        " If not provided, runs in interactive mode.",
+        help="Natural language query to analyze. "
+        "If not provided, runs in interactive mode.",
     )
     parser.add_argument(
         "--lang",
         type=str,
-        default=None,  # Let the orchestrator auto-detect or assume English
-        help="Language code of the input query (e.g., 'en', 'ru')."
-        " Default: auto-detect/English.",
+        default=None,
+        help="Language code of the input query (e.g., 'en', 'ru'). "
+        "Default: auto-detect/English.",
     )
     parser.add_argument(
         "--test", action="store_true", help="Run a predefined set of test queries."
@@ -84,14 +107,14 @@ def main():
     parser.add_argument(
         "--device",
         type=str,
-        default=None,  # Let components auto-detect (cpu, mps, cuda)
-        help="Specify device for LLM models (e.g., 'cpu', 'mps', 'cuda:0')."
-        " Default: auto-detect.",
+        default=None,
+        help="Specify device for LLM models (e.g., 'cpu', 'mps', 'cuda:0'). "
+        "Default: auto-detect.",
     )
     parser.add_argument(
         "--data_path",
         type=str,
-        default=str(DATA_PATH),  # Use the calculated DATA_PATH as default
+        default=str(DATA_PATH),
         help=f"Path to the freelancer earnings CSV data file. Default: {DATA_PATH}",
     )
     parser.add_argument(
@@ -113,8 +136,8 @@ def main():
         if not actual_data_path.is_file():
             logger.error(f"Data file not found at specified path: {actual_data_path}")
             print(
-                f"Error: Data file not found at {actual_data_path}."
-                f" Please check the --data_path argument."
+                f"Error: Data file not found at {actual_data_path}. "
+                f"Please check the --data_path argument."
             )
             return 1
 
@@ -137,8 +160,8 @@ def main():
             run_test_queries(orchestrator)
         elif args.query:
             logger.info(
-                f"Processing single query from CLI: '{args.query}'"
-                f" (lang: {args.lang or 'auto-detect'})"
+                f"Processing single query from CLI: '{args.query}' "
+                f"(lang: {args.lang or 'auto-detect'})"
             )
             result = orchestrator.process_query(
                 args.query, source_language_code=args.lang
@@ -148,10 +171,7 @@ def main():
             run_interactive_mode(orchestrator)
 
     except Exception as e:
-        logger.exception(
-            "A critical error occurred during application setup or execution."
-        )
-        print(f"A critical error occurred: {e}")
+        logger.exception(f"A critical error occurred during application execution. {e}")
         return 1
 
     return 0
